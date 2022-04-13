@@ -258,6 +258,7 @@ namespace BTLLTHSK_FINAL
             this.Controls.Add(this.tb_Malop);
             this.Name = "frmtblLop";
             this.Text = "Form2";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmtblLop_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_lopvamon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();

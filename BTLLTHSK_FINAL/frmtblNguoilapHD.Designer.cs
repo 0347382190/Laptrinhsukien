@@ -179,21 +179,23 @@ namespace BTLLTHSK_FINAL
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Location = new System.Drawing.Point(0, 24);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1416, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1324, 24);
             this.menuStrip1.TabIndex = 19;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // menuStrip2
             // 
+            this.menuStrip2.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip2.Size = new System.Drawing.Size(1416, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(1324, 24);
             this.menuStrip2.TabIndex = 20;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -213,7 +215,7 @@ namespace BTLLTHSK_FINAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1416, 607);
+            this.ClientSize = new System.Drawing.Size(1324, 607);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
@@ -234,7 +236,7 @@ namespace BTLLTHSK_FINAL
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmtblNguoilapHD";
             this.Text = "Bảng người lập hóa đơn";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmtblNguoilapHD_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

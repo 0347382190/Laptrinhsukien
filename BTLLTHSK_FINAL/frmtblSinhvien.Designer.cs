@@ -267,7 +267,7 @@ namespace BTLLTHSK_FINAL
             this.comboBox1.TabIndex = 30;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // Form1
+            // frmtblSinhvien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -293,8 +293,9 @@ namespace BTLLTHSK_FINAL
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Form1";
+            this.Name = "frmtblSinhvien";
             this.Text = "Bảng sinh viên ";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmtblSinhvien_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dsSinhvien)).EndInit();
