@@ -137,11 +137,6 @@ namespace BTLLTHSK_FINAL
                 Close();
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            SqlConnection conn = new SqlConnection(chuoiketnoi);
-            conn.Close();
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -170,5 +165,13 @@ namespace BTLLTHSK_FINAL
             }
         }
 
+        private void frmtblNguoilapHD_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Form1 form1 = new Form1();
+                form1.Show();
+            }
+        }
     }
     }

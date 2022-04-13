@@ -26,7 +26,6 @@ namespace BTLLTHSK_FINAL
                 errorProvider1.SetError(txtTenSV, "");
             }
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             hienthi();
@@ -34,8 +33,6 @@ namespace BTLLTHSK_FINAL
             comboBox1.Items.Add("Nu");
             cbbMaSV.Focus();
         }
-       
-
         private void txtSodienthoai_Validating(object sender, CancelEventArgs e)
         {
             if(txtSodienthoai.Mask == "")
@@ -292,6 +289,14 @@ namespace BTLLTHSK_FINAL
             else
             {
                 errorProvider1.SetError(txtEmail, "");
+            }
+        }
+        private void frmtblSinhvien_FormClosing(object sender, FormClosedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Form1 form1 = new Form1();
+                form1.Show();
             }
         }
     }

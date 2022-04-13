@@ -20,12 +20,14 @@ namespace BTLLTHSK_FINAL
         private void sinhViênToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             frmtblSinhvien frmtblSinhvien = new frmtblSinhvien();
+            this.Hide();
             frmtblSinhvien.Show();
         }
 
         private void lớpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmtblLop frmtblLop = new frmtblLop();
+            this.Hide();
             frmtblLop.Show();
         }
 
@@ -37,24 +39,28 @@ namespace BTLLTHSK_FINAL
         private void ngườiLậpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmtblNguoilapHD frmtblNguoilap = new frmtblNguoilapHD();
+            this.Hide();
             frmtblNguoilap.Show();
         }
 
         private void hóaĐơnToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmtblHoadon frmtblHoadon = new frmtblHoadon();
+            this.Hide();
             frmtblHoadon.Show();
         }
 
         private void mônHọcToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmtblMonhoc frmtblMonhoc = new frmtblMonhoc();
+            this.Hide();
             frmtblMonhoc.Show();
         }
 
         private void giảngViênToolStripMenuItem_Click(object sender, EventArgs e)
         {
             fGiangVien fGiangVien = new fGiangVien();
+            this.Hide();
             fGiangVien.Show();
         }
     }
