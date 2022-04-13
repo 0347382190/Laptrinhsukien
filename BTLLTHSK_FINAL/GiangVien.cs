@@ -160,5 +160,14 @@ namespace BTLLTHSK_FINAL
                 ShowAllGiangVien();
             }
         }
+
+        private void fGiangVien_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                Form1 form1 = new Form1();
+                form1.Show();
+            }
+        }
     }
 }
