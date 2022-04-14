@@ -63,5 +63,13 @@ namespace BTLLTHSK_FINAL
             this.Hide();
             fGiangVien.Show();
         }
+
+        private void hóaĐơnToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Report fReport = new Report();
+            this.Hide();
+            fReport.Show();
+            
+        }
     }
 }
