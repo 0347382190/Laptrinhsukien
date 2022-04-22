@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 
+
 namespace BTLLTHSK_FINAL
 {
     public partial class frmtblHoadon : Form
@@ -25,9 +26,21 @@ namespace BTLLTHSK_FINAL
             comboBox1.DisplayMember = "sMaNguoiLap";
             comboBox1.ValueMember = "sTenNguoiLap";
         }
+
+        private void loadlop()
+        {
+            SqlConnection nl = new SqlConnection(chuoiketnoi);
+            nl.Open();
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select * from tblLop", nl);
+            DataTable dt = new DataTable();
+            sqlDataAdapter.Fill(dt);
+            comboBox4.DataSource = dt;
+            comboBox4.DisplayMember = "sMalop";
+            comboBox4.ValueMember = "sTenlophoc";
+        }
         private void loadsv()
         {
-            SqlConnection sv = new SqlConnection(chuoiketnoi);
+           SqlConnection sv = new SqlConnection(chuoiketnoi);
             sv.Open();
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select * from tblSinhVien", sv);
             DataTable dt = new DataTable();
@@ -44,6 +57,10 @@ namespace BTLLTHSK_FINAL
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
             dataGridView1.DataSource = dt;
+
+            dataGridView1.Columns["Mã người lập"].Visible = false;
+            dataGridView1.Columns["Mã sinh viên"].Visible = false;
+            dataGridView1.Columns["Mã hóa đơn"].Visible = false;
         }
 
         private void Hoadon_Load(object sender, EventArgs e)
@@ -53,7 +70,8 @@ namespace BTLLTHSK_FINAL
             conn.Open();
             loadnguoilap();
             loaddtghd();
-            loadsv();
+           loadsv();
+            loadlop();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -65,9 +83,10 @@ namespace BTLLTHSK_FINAL
             cmd.Parameters.AddWithValue("@maHD", textBox1.Text);
             cmd.Parameters.AddWithValue("@maNl", comboBox1.Text);
             cmd.Parameters.AddWithValue("@maSV", comboBox3.Text);
+            cmd.Parameters.AddWithValue("@malop", comboBox4.Text);
             cmd.Parameters.AddWithValue("@Ngaylap", dateTimePicker1.Text);
             cmd.Parameters.AddWithValue("@Ngaydong", dateTimePicker2.Text);
-            cmd.Parameters.AddWithValue("@tongtien", textBox2.Text);
+          
 
 
 
@@ -92,6 +111,12 @@ namespace BTLLTHSK_FINAL
             cmd.CommandText = @"suahd";
             cmd.Parameters.AddWithValue("@mahd", ma);
             cmd.Parameters.AddWithValue("@dngaydong", dateTimePicker2.Text);
+            cmd.Parameters.AddWithValue("@dngaylap", dateTimePicker1.Text);
+            cmd.Parameters.AddWithValue("@malop", comboBox4.Text);
+            cmd.Parameters.AddWithValue("@masv", comboBox3.Text);
+            cmd.Parameters.AddWithValue("@manl", comboBox1.Text);
+            
+
             int i = cmd.ExecuteNonQuery();
             if (i > 0)
             {
@@ -110,9 +135,11 @@ namespace BTLLTHSK_FINAL
                 textBox1.Text = dataGridView1.CurrentRow.Cells["Mã hóa đơn"].Value.ToString();
                 comboBox1.Text =dataGridView1.CurrentRow.Cells["Mã người lập"].Value.ToString();
                 comboBox3.Text = dataGridView1.CurrentRow.Cells["Mã sinh viên"].Value.ToString();
+            comboBox4.Text = dataGridView1.CurrentRow.Cells["Mã lớp"].Value.ToString();
+            textBox2.Text = dataGridView1.CurrentRow.Cells["Tên sinh viên"].Value.ToString();
                 dateTimePicker1.Text = dataGridView1.CurrentRow.Cells["Ngày lập"].Value.ToString();
                 dateTimePicker2.Text = dataGridView1.CurrentRow.Cells["Ngày đóng"].Value.ToString();
-                textBox2.Text = dataGridView1.CurrentRow.Cells["Tổng tiền"].Value.ToString();
+               
 
 
         }
@@ -139,24 +166,21 @@ namespace BTLLTHSK_FINAL
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string chucvu = textBox2.Text;
-            string select = "select * from tblHoaDon where fTongtien >='" + chucvu + "'";
-            SqlCommand cmd = new SqlCommand(select, conn);
-            cmd.Parameters.AddWithValue("@maHD", textBox1.Text);
-            cmd.Parameters.AddWithValue("@maNl", comboBox1.Text);
-            cmd.Parameters.AddWithValue("@maSV", comboBox3.Text);
-            cmd.Parameters.AddWithValue("@Ngaylap", dateTimePicker1.Text);
-            cmd.Parameters.AddWithValue("@Ngaydong", dateTimePicker2.Text);
-            cmd.Parameters.AddWithValue("@tongien", textBox2.Text);
-            cmd.ExecuteNonQuery();
-            SqlDataReader dr = cmd.ExecuteReader();
+            SqlConnection hd = new SqlConnection(chuoiketnoi);
+            hd.Open();
+
+            String sql = "Select * from dsHoadon where [Tên sinh viên] LIKE N'%" + textBox2.Text + "%' ";
+
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql, hd);
             DataTable dt = new DataTable();
-            dt.Load(dr);
+            sqlDataAdapter.Fill(dt);
             dataGridView1.DataSource = dt;
+            hd.Close();
+            
 
             if (dataGridView1.Rows.Count > 0)
             {
-                MessageBox.Show("tìm thấy hóa đơn lớn hơn " + chucvu + " có số lượng là " + dataGridView1.Rows.Count);
+                MessageBox.Show("tìm thấy hóa đơn của sinh viên " + textBox2.Text); 
 
             }
             else
@@ -164,6 +188,7 @@ namespace BTLLTHSK_FINAL
                 MessageBox.Show("không tìm thấy");
             }
         }
+    
 
         private void frmtblHoadon_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -172,6 +197,27 @@ namespace BTLLTHSK_FINAL
                 Form1 form1 = new Form1();
                 form1.Show();
             }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = @"chitiethoadonsv";
+            cmd.Parameters.AddWithValue("@masv", comboBox3.Text);
+            DataTable dt = new DataTable("BanginHoaDon");
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+            sqlDataAdapter.SelectCommand = cmd;
+            sqlDataAdapter.Fill(dt);
+            maxchitiet baocao = new maxchitiet();
+            baocao.SetDataSource(dt);
+            Forminvao forminvao = new Forminvao();
+            forminvao.crystalReportViewer1.ReportSource = baocao;
+            this.Hide();
+            forminvao.Show();
+            //
+
         }
     }
 }

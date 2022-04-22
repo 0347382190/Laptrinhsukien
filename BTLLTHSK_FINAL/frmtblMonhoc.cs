@@ -17,7 +17,7 @@ namespace BTLLTHSK_FINAL
         {
             using (SqlConnection sotinchi = new SqlConnection(chuoiketnoi)) 
             sotinchi.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select * from dsMonhoc",chuoiketnoi);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("Select * from dsMonHoc",chuoiketnoi);
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
             dataGridView1.DataSource = dt;
@@ -45,13 +45,14 @@ namespace BTLLTHSK_FINAL
         private void btnThem_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(chuoiketnoi);
+            conn.Open();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = @"themMh";
             cmd.Parameters.AddWithValue("@maMh", textBox1.Text);
             cmd.Parameters.AddWithValue("@tenmh", textBox2.Text);
-            cmd.Parameters.AddWithValue("@sotinchi", listBox1.Text);
+            cmd.Parameters.AddWithValue("@soTC", listBox1.Text);
 
 
             int i= cmd.ExecuteNonQuery();
@@ -77,13 +78,14 @@ namespace BTLLTHSK_FINAL
         private void btnSua_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(chuoiketnoi);
+            conn.Open();
             string ma = textBox1.Text = dataGridView1.CurrentRow.Cells["Mã môn học"].Value.ToString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = @"suaMh";
             cmd.Parameters.AddWithValue("@maMh", ma);
-            cmd.Parameters.AddWithValue("@sotinchi",listBox1.Text);
+            cmd.Parameters.AddWithValue("@soTC",listBox1.Text);
             int i = cmd.ExecuteNonQuery();
             if (i > 0)
             {
@@ -99,6 +101,7 @@ namespace BTLLTHSK_FINAL
         private void btnXoa_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(chuoiketnoi);
+            conn.Open();
             string ma = textBox1.Text;
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
@@ -130,6 +133,7 @@ namespace BTLLTHSK_FINAL
         private void button1_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(chuoiketnoi);
+            conn.Open();
             string sotinchi = listBox1.Text;
             string select = "select * from tblMonHoc where iSotinchi ='" + sotinchi + "'";
             SqlCommand cmd = new SqlCommand(select,conn);

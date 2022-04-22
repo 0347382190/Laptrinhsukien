@@ -7,21 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CrystalDecisions.CrystalReports.Engine;
+
 namespace BTLLTHSK_FINAL
 {
-    public partial class Report : Form
+    public partial class Forminvao : Form
     {
-        public Report()
+        public Forminvao()
         {
             InitializeComponent();
         }
 
         private void crystalReportViewer1_Load(object sender, EventArgs e)
-        {
-        }
-
-        private void Report_Load(object sender, EventArgs e)
         {
 
         }

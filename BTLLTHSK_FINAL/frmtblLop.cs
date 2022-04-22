@@ -24,7 +24,7 @@ namespace BTLLTHSK_FINAL
             
             SqlConnection cnn = new SqlConnection(connect);
             cnn.Open();
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT* FROM tblMonhoc", cnn);
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter("SELECT* FROM tblMonHoc", cnn);
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
             comboMon.DataSource = dt;
@@ -198,10 +198,9 @@ namespace BTLLTHSK_FINAL
         {
             SqlConnection cnn = new SqlConnection(connect);
             cnn.Open();
-            //SqlCommand cmd = new SqlCommand();
-            // cmd.Connection = cnn;
+            
             String sql = "Select * from tblLop where sMalop LIKE '%" + tb_Malop.Text + "%' or  sTenlophoc LIKE '%" + tb_tenlop.Text + "%' or  isoSV LIKE '%" + tb_soSV.Text + "%'";
-            //cmd.ExecuteNonQuery();
+           
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql,cnn);
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);

@@ -27,18 +27,9 @@ namespace BTLLTHSK_FINAL
             DataTable dt = new DataTable();
             sqlDataAdapter.Fill(dt);
             dataGridView1.DataSource = dt;
+            dataGridView1.Columns["Mã người lập"].Visible = false;
         }
-        private void loaddtg2()
-        {
-            SqlConnection conn = new SqlConnection(chuoiketnoi);
-            string sqlSelect = "Select * from dsNguoiLap";
-            SqlCommand cmd = new SqlCommand(sqlSelect, conn);          
-            SqlDataReader dr =  cmd.ExecuteReader();
-            DataTable dt = new DataTable();
-            dt.Load(dr);
-            dataGridView1.DataSource= dt;
-
-        }
+        
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -94,6 +85,9 @@ namespace BTLLTHSK_FINAL
             cmd.CommandText = @"suaNl";
             cmd.Parameters.AddWithValue("@maNl", ma);
             cmd.Parameters.AddWithValue("@chucvu",listBox1.Text);
+            cmd.Parameters.AddWithValue("@ngaysinh", dateTimePicker1.Text);
+            cmd.Parameters.AddWithValue("@ten", textBox2.Text);
+            cmd.Parameters.AddWithValue("@cmnd", textBox4.Text);
             int i = cmd.ExecuteNonQuery();
             if (i > 0)
             {
@@ -109,6 +103,7 @@ namespace BTLLTHSK_FINAL
         private void btnXoa_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(chuoiketnoi);
+            conn.Open();
             string ma = textBox1.Text;
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
@@ -141,8 +136,9 @@ namespace BTLLTHSK_FINAL
         private void button1_Click(object sender, EventArgs e)
         {
             SqlConnection conn = new SqlConnection(chuoiketnoi);
+            conn.Open();
             string chucvu = listBox1.Text;
-            string select = "select * from tblNguoiLap where sChucVu ='" + chucvu + "'";
+            string select = "select sTenNguoiLap,dNgaySinh,sCMND,sChucVu from tblNguoiLap where sChucVu ='" + chucvu + "'";
             SqlCommand cmd = new SqlCommand(select,conn);
             cmd.Parameters.AddWithValue("@maNl", textBox1.Text);
             cmd.Parameters.AddWithValue("@ten", textBox2.Text);

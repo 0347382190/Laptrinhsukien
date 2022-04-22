@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -23,7 +25,7 @@ namespace BTLLTHSK_FINAL
             this.Hide();
             frmtblSinhvien.Show();
         }
-
+        String chuoiketnoi = ConfigurationManager.ConnectionStrings["QLHPSV"].ConnectionString;
         private void lớpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmtblLop frmtblLop = new frmtblLop();
@@ -70,6 +72,15 @@ namespace BTLLTHSK_FINAL
             this.Hide();
             fReport.Show();
             
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SqlConnection conn = new SqlConnection(chuoiketnoi);
+            if (MessageBox.Show("Bạn có muốn thoát", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                conn.Close();
+            }
         }
     }
 }
