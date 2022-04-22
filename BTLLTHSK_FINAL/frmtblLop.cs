@@ -73,7 +73,6 @@ namespace BTLLTHSK_FINAL
         {
             if(checkvalue()==1)
             {
-                string connect = @"Data Source=DESKTOP-7CRV2HV\SQLEXPRESS;Initial Catalog=QLHocPhiSV;Integrated Security=True";
                 SqlConnection cnn = new SqlConnection(connect);
                 cnn.Open();
                 SqlCommand cmd = new SqlCommand("proc_InserttblLop", cnn);
@@ -199,7 +198,7 @@ namespace BTLLTHSK_FINAL
             SqlConnection cnn = new SqlConnection(connect);
             cnn.Open();
             
-            String sql = "Select * from tblLop where sMalop LIKE '%" + tb_Malop.Text + "%' or  sTenlophoc LIKE '%" + tb_tenlop.Text + "%' or  isoSV LIKE '%" + tb_soSV.Text + "%'";
+            String sql = "Select * from tblLop where sMalop LIKE N'%" + tb_Malop.Text + "%'";
            
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql,cnn);
             DataTable dt = new DataTable();

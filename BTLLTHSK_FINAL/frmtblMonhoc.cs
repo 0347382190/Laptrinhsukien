@@ -79,12 +79,12 @@ namespace BTLLTHSK_FINAL
         {
             SqlConnection conn = new SqlConnection(chuoiketnoi);
             conn.Open();
-            string ma = textBox1.Text = dataGridView1.CurrentRow.Cells["Mã môn học"].Value.ToString();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = conn;
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = @"suaMh";
-            cmd.Parameters.AddWithValue("@maMh", ma);
+            cmd.CommandText = @"suamh";
+            cmd.Parameters.AddWithValue("@mamh", textBox1.Text);
+            cmd.Parameters.AddWithValue("@tenmh", textBox2.Text);
             cmd.Parameters.AddWithValue("@soTC",listBox1.Text);
             int i = cmd.ExecuteNonQuery();
             if (i > 0)

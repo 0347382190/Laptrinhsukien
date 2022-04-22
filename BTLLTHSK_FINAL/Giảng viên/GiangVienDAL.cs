@@ -29,7 +29,7 @@ namespace BTLLTHSK_FINAL
         //câu lệnh bool nếu thêm sửa xóa thành công thì trả về true nếu k thành công trả về Fale
         public bool InsertGiangVien(tblGiangVien gv)
         {
-            string sql = "INSERT INTO tblGiangVien(sMaGiangVien, sTenGiangVien, sGioiTinh, sSoDT, sDiaChi, makhoa) VALUES (@sMaGiangVien, @sTenGiangVien, @sGioiTinh, @sSoDT, @sDiaChi, @makhoa)";
+            string sql = "INSERT INTO tblGiangVien(sMaGiangVien, sTenGiangVien, sGioiTinh, sSoDT, sDiaChi) VALUES (@sMaGiangVien, @sTenGiangVien, @sGioiTinh, @sSoDT, @sDiaChi)";
             SqlConnection con = new SqlConnection(chuoiketnoi);
             try
             {
@@ -40,7 +40,6 @@ namespace BTLLTHSK_FINAL
                 cmd.Parameters.Add("@sGioiTinh", SqlDbType.NVarChar).Value = gv.sGioiTinh;
                 cmd.Parameters.Add("@sSoDT", SqlDbType.NVarChar).Value = gv.sSoDT;
                 cmd.Parameters.Add("@sDiaChi", SqlDbType.NVarChar).Value = gv.sDiaChi;
-                cmd.Parameters.Add("@makhoa", SqlDbType.NVarChar).Value = gv.makhoa;
                 cmd.ExecuteNonQuery();
                 con.Close();
             }
@@ -52,7 +51,7 @@ namespace BTLLTHSK_FINAL
         }
         public bool UpdateGiangVien(tblGiangVien gv)
         {
-            string sql = "UPDATE tblGiangVien SET sTenGiangVien = @sTenGiangVien, sGioiTinh = @sGioiTinh, sSoDT=@sSoDT, sDiaChi=@sDiaChi, makhoa=@makhoa  WHERE sMaGiangVien = @sMaGiangVien";
+            string sql = "UPDATE tblGiangVien SET sTenGiangVien = @sTenGiangVien, sGioiTinh = @sGioiTinh, sSoDT=@sSoDT, sDiaChi=@sDiaChi  WHERE sMaGiangVien = @sMaGiangVien";
             SqlConnection con = new SqlConnection(chuoiketnoi);
             try
             {
@@ -63,7 +62,6 @@ namespace BTLLTHSK_FINAL
                 cmd.Parameters.Add("@sGioiTinh", SqlDbType.NVarChar).Value = gv.sGioiTinh;
                 cmd.Parameters.Add("@sSoDT", SqlDbType.NVarChar).Value = gv.sSoDT;
                 cmd.Parameters.Add("@sDiaChi", SqlDbType.NVarChar).Value = gv.sDiaChi;
-                cmd.Parameters.Add("@makhoa", SqlDbType.NVarChar).Value = gv.makhoa;
                 cmd.ExecuteNonQuery();
                 con.Close();
             }

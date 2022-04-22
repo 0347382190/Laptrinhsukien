@@ -57,12 +57,6 @@ namespace BTLLTHSK_FINAL
                 txtDiaChi.Focus();
                 return false;
             }
-            if (string.IsNullOrEmpty(txtMaKhoa.Text))
-            {
-                MessageBox.Show("Bạn chưa nhập mã khoa ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                txtMaKhoa.Focus();
-                return false;
-            }
 
             return true;
         }
@@ -81,7 +75,6 @@ namespace BTLLTHSK_FINAL
                 gv.sGioiTinh = txtGioiTinh.Text;
                 gv.sSoDT = txtSDT.Text;
                 gv.sDiaChi = txtDiaChi.Text;
-                gv.makhoa = txtMaKhoa.Text;
                 if (bllGV.InsertGiangVien(gv))
                 {
                     ShowAllGiangVien();
@@ -103,7 +96,6 @@ namespace BTLLTHSK_FINAL
                 txtGioiTinh.Text = dataGridGiangVien.Rows[index].Cells["sDiaChi"].Value.ToString();
                 txtSDT.Text = dataGridGiangVien.Rows[index].Cells["sSoDT"].Value.ToString();
                 txtDiaChi.Text = dataGridGiangVien.Rows[index].Cells["sDiaChi"].Value.ToString();
-                txtMaKhoa.Text = dataGridGiangVien.Rows[index].Cells["makhoa"].Value.ToString();
 
             }
         }
@@ -118,7 +110,6 @@ namespace BTLLTHSK_FINAL
                 gv.sGioiTinh = txtGioiTinh.Text;
                 gv.sSoDT = txtSDT.Text;
                 gv.sDiaChi = txtDiaChi.Text;
-                gv.makhoa = txtMaKhoa.Text;
                 if(bllGV.UpdateGiangVien(gv))
                 {
                     ShowAllGiangVien();
@@ -136,6 +127,11 @@ namespace BTLLTHSK_FINAL
             if(MessageBox.Show("Bạn có muốn xóa không","Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)== DialogResult.Yes)
             {
                 tblGiangVien gv = new tblGiangVien();
+                gv.sMaGiangVien = txtMaGV.Text;
+                gv.sTenGiangVien = txtHoTen.Text;
+                gv.sGioiTinh = txtGioiTinh.Text;
+                gv.sSoDT = txtSDT.Text;
+                gv.sDiaChi = txtDiaChi.Text;
                 if (bllGV.DeleteGiangVien(gv))
                 {
                     ShowAllGiangVien();
